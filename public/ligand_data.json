@@ -1,0 +1,23 @@
+{
+      "pdb_data": "put_your_pdb_file_content_here",
+      "ligands": [
+        {
+          "name": "Ligand 1",
+          "sdf_path": "/ligand1.sdf",
+          "statistics": {
+            "binding_affinity": -7.5,
+            "qed": 0.85,
+            "sa_score": 3.2
+          }
+        },
+        {
+          "name": "Ligand 2",
+          "sdf_path": "/ligand2.sdf",
+          "statistics": {
+            "binding_affinity": -8.2,
+            "qed": 0.78,
+            "sa_score": 4.1
+          }
+        }
+      ]
+    }
