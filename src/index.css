@@ -25,48 +25,7 @@ body {
     }
 
     .protein-viewer {
-      width: 60%;
+      width: 100%;
       height: 600px;
       border: 1px solid #ddd;
-    }
-
-    .ligand-selector {
-      width: 40%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    .ligand-selector h2 {
-      margin-top: 0;
-    }
-
-    .ligand-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .ligand-list li {
-      padding: 8px;
-      cursor: pointer;
-      border-bottom: 1px solid #eee;
-    }
-
-    .ligand-list li:hover {
-      background-color: #f0f0f0;
-    }
-
-    .ligand-list li.selected {
-      background-color: #e0e0e0;
-    }
-
-    .statistics-display {
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    .statistics-display h3 {
-      margin-top: 0;
     }

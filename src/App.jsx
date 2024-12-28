@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-    import * as THREE from 'three';
     import './index.css';
+    import * as $3Dmol from '3dmol';
 
     function App() {
       const [ligands, setLigands] = useState([]);
@@ -8,7 +8,6 @@ import React, { useState, useEffect, useRef } from 'react';
       const [statistics, setStatistics] = useState(null);
       const viewerRef = useRef(null);
       const [pdbData, setPdbData] = useState(null);
-      const [ligandData, setLigandData] = useState(null);
       const [view, setView] = useState(null);
 
       useEffect(() => {
@@ -23,16 +22,22 @@ import React, { useState, useEffect, useRef } from 'react';
 
       useEffect(() => {
         if (viewerRef.current && pdbData) {
-          if (view) {
-            view.clear();
-          }
-          const view = new $3Dmol.GLViewer(viewerRef.current, { backgroundColor: 'white' });
-          setView(view);
-          view.addModel(pdbData, "pdb");
-          view.setStyle({}, { cartoon: { color: 'spectrum' } });
-          view.zoomTo();
+          const newView = new $3Dmol.GLViewer(viewerRef.current, { backgroundColor: 'white' });
+          setView(newView);
+          fetch(pdbData)
+            .then(response => response.text())
+            .then(pdbContent => {
+              newView.addModel(pdbContent, "pdb");
+              newView.setStyle({}, { cartoon: { color: 'spectrum' } });
+              newView.zoomTo();
+              newView.render();
+              if (ligands.length > 0) {
+                handleLigandSelect(ligands[0]);
+              }
+            })
+            .catch(error => console.error('Error loading PDB data:', error));
         }
-      }, [viewerRef, pdbData]);
+      }, [viewerRef, pdbData, ligands]);
 
       useEffect(() => {
         if (view && selectedLigand) {
@@ -40,10 +45,10 @@ import React, { useState, useEffect, useRef } from 'react';
           fetch(selectedLigand.sdf_path)
             .then(response => response.text())
             .then(sdfData => {
-              setLigandData(sdfData);
               view.addModel(sdfData, "sdf");
               view.setStyle({ model: 1 }, { stick: { radius: 0.2, color: 'blue' } });
               view.zoomTo();
+              view.render();
             })
             .catch(error => console.error('Error loading SDF data:', error));
           setStatistics(selectedLigand.statistics);

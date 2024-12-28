@@ -1,23 +1,23 @@
 {
-  "pdb_data": "raw_4yvg.pdb",
-  "ligands": [
-    {
-      "name": "Ligand 1",
-      "sdf_path": "/adomet.sdf",
-      "statistics": {
-        "binding_affinity": -7.5,
-        "qed": 0.85,
-        "sa_score": 3.2
-      }
-    },
-    {
-      "name": "Ligand 2",
-      "sdf_path": "/adomet.sdf",
-      "statistics": {
-        "binding_affinity": -8.2,
-        "qed": 0.78,
-        "sa_score": 4.1
-      }
+      "pdb_data": "/raw_4yvg.pdb",
+      "ligands": [
+        {
+          "name": "Ligand 1",
+          "sdf_path": "/adomet.sdf",
+          "statistics": {
+            "binding_affinity": -7.5,
+            "qed": 0.85,
+            "sa_score": 3.2
+          }
+        },
+        {
+          "name": "Ligand 2",
+          "sdf_path": "/adomet.sdf",
+          "statistics": {
+            "binding_affinity": -8.2,
+            "qed": 0.78,
+            "sa_score": 4.1
+          }
+        }
+      ]
     }
-  ]
-}
