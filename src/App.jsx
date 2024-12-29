@@ -13,6 +13,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [view, setView] = useState(null);
+  const [initialZoomDone, setInitialZoomDone] = useState(false);
+  const [sdfData, setSdfData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,8 +74,16 @@ function App() {
         const pdbContent = await response.text();
         newView.addModel(pdbContent, "pdb");
         newView.setStyle({}, { cartoon: { color: 'spectrum' } });
+        
+        // Add surface representation
+        newView.addSurface($3Dmol.SurfaceType.VDW, {
+          opacity: 0.85,
+          color: 'white'
+        });
+
         newView.zoomTo();
         newView.render();
+        setInitialZoomDone(true);
       } catch (error) {
         setError(error.message);
         console.error('Error loading PDB data:', error);
@@ -124,11 +134,14 @@ function App() {
           throw new Error(`HTTP error! status: ${sdfResponse.status}`);
         }
         const sdfData = await sdfResponse.text();
+        setSdfData(sdfData);
         view.addModel(sdfData, "sdf");
         view.setStyle({ model: 1 }, { stick: { radius: 0.2 } });
         
-        // Center and zoom to ligand
-        view.zoomTo({ model: 1 });
+        // Center and zoom to ligand only if initial zoom is not done
+        if (!initialZoomDone) {
+          view.zoomTo({ model: 1 });
+        }
         view.render();
         setStatistics(selectedLigand.statistics);
       } catch (error) {
@@ -146,44 +159,61 @@ function App() {
     setSelectedLigand(ligand);
   };
 
+  const handleDownload = () => {
+    if (!sdfData) return;
+    const blob = new Blob([sdfData], { type: 'chemical/x-mdl-sdfile' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${selectedLigand.name}.sdf`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="viewer-container">
-      <div className="protein-viewer" ref={viewerRef}>
-        {isLoading && <p>Loading...</p>}
-        {error && <p>Error: {error}</p>}
-      </div>
-      <div className="ligand-selector">
-        <h2>Display Options</h2>
-        <select 
-          value={displayStyle} 
-          onChange={(e) => setDisplayStyle(e.target.value)}
-        >
-          <option value="cartoon">Cartoon</option>
-          <option value="line">Line</option>
-          <option value="stick">Stick</option>
-        </select>
-        <h2>Ligands</h2>
-        <ul className="ligand-list">
-          {ligands.map((ligand, index) => (
-            <li
-              key={index}
-              onClick={() => handleLigandSelect(ligand)}
-              className={selectedLigand === ligand ? 'selected' : ''}
-            >
-              {ligand.name}
-            </li>
-          ))}
-        </ul>
-        {statistics && (
-          <div className="statistics-display">
-            <h3>Statistics</h3>
-            {Object.entries(statistics).map(([key, value]) => (
-              <p key={key}>
-                <strong>{key}:</strong> {value}
-              </p>
+      <h1>TrmD (4yvg) and its Inhibitors</h1>
+      <div className="viewer-content">
+        <div className="ligand-selector">
+          <h2>Display Options</h2>
+          <select 
+            value={displayStyle} 
+            onChange={(e) => setDisplayStyle(e.target.value)}
+          >
+            <option value="cartoon">Cartoon</option>
+            <option value="line">Line</option>
+            <option value="stick">Stick</option>
+          </select>
+          <h2>Ligands</h2>
+          <ul className="ligand-list">
+            {ligands.map((ligand, index) => (
+              <li
+                key={index}
+                onClick={() => handleLigandSelect(ligand)}
+                className={selectedLigand === ligand ? 'selected' : ''}
+              >
+                {ligand.name}
+              </li>
             ))}
-          </div>
-        )}
+          </ul>
+          {statistics && (
+            <div className="statistics-display">
+              <h3>Statistics</h3>
+              {Object.entries(statistics).map(([key, value]) => (
+                <p key={key}>
+                  <strong>{key}:</strong> {value}
+                </p>
+              ))}
+            </div>
+          )}
+          <button onClick={handleDownload} disabled={!sdfData}>
+            Download SDF
+          </button>
+        </div>
+        <div className="protein-viewer" ref={viewerRef}>
+          {isLoading && <p>Loading...</p>}
+          {error && <p>Error: {error}</p>}
+        </div>
       </div>
     </div>
   );
