@@ -11,8 +11,8 @@
       }
     },
     {
-      "name": "Best 1",
-      "sdf_path": "/best_1.sdf",
+      "name": "Compound Y",
+      "sdf_path": "/CpY.sdf",
       "statistics": {
         "binding_affinity": -8.2,
         "qed": 0.78,
@@ -20,8 +20,17 @@
       }
     },
     {
-      "name": "Best 13",
-      "sdf_path": "/best_13.sdf",
+      "name": "Compound YF",
+      "sdf_path": "/CpYF.sdf",
+      "statistics": {
+        "binding_affinity": -8.2,
+        "qed": 0.78,
+        "sa_score": 4.1
+      }
+    },
+    {
+      "name": "Compound YOH",
+      "sdf_path": "/CpYOH.sdf",
       "statistics": {
         "binding_affinity": -8.2,
         "qed": 0.78,
