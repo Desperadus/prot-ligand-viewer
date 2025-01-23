@@ -35,7 +35,7 @@
       "name": "Compound YF",
       "sdf_path": "/CpYF.sdf",
       "statistics": {
-        "VINA Score": -8.2,
+        "VINA Score": -12.72,
         "QED": 0.60,
         "SA score": 3.06,
         "RTMScore": 42.8
@@ -45,7 +45,7 @@
       "name": "Compound YOH",
       "sdf_path": "/CpYOH.sdf",
       "statistics": {
-        "VINA Score": -8.2,
+        "VINA Score": -13.06,
         "QED": 0.51,
         "SA score": 3.06,
         "RTMScore": 40.2
