@@ -5,36 +5,60 @@
       "name": "Adomet",
       "sdf_path": "/adomet.sdf",
       "statistics": {
-        "binding_affinity": -7.5,
-        "qed": 0.85,
-        "sa_score": 3.2
+        "VINA Score": -8.69,
+        "QED": 0.29,
+        "SA score": 4.74,
+        "RTMScore": 27.6
+      }
+    },
+    {
+      "name": "Compound 23 ",
+      "sdf_path": "/cp23_chai1_out.sdf",
+      "statistics": {
+        "VINA Score": -8.61,
+        "QED": 0.76,
+        "SA score": 2.30,
+        "RTMScore": 34.57
       }
     },
     {
       "name": "Compound Y",
       "sdf_path": "/CpY.sdf",
       "statistics": {
-        "binding_affinity": -8.2,
-        "qed": 0.78,
-        "sa_score": 4.1
+        "VINA Score": -13.1,
+        "QED": 0.62,
+        "SA score": 3.01,
+        "RTMScore": 38.6
       }
     },
     {
       "name": "Compound YF",
       "sdf_path": "/CpYF.sdf",
       "statistics": {
-        "binding_affinity": -8.2,
-        "qed": 0.78,
-        "sa_score": 4.1
+        "VINA Score": -8.2,
+        "QED": 0.60,
+        "SA score": 3.06,
+        "RTMScore": 42.8
       }
     },
     {
       "name": "Compound YOH",
       "sdf_path": "/CpYOH.sdf",
       "statistics": {
-        "binding_affinity": -8.2,
-        "qed": 0.78,
-        "sa_score": 4.1
+        "VINA Score": -8.2,
+        "QED": 0.51,
+        "SA score": 3.06,
+        "RTMScore": 40.2
+      }
+    },
+    {
+      "name": "Ravicti",
+      "sdf_path": "/chembl2105745_hydrogenated.sdf",
+      "statistics": {
+        "VINA Score": -13.5,
+        "QED": 0.16,
+        "SA score": 2.16,
+        "RTMScore": 32.2
       }
     }
   ]
